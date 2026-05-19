@@ -34,7 +34,7 @@ public sealed class DashboardService : IDashboardService
                 var visits = await _visitRepo.GetByStatusAsync(status, request.DepartmentId, ct);
                 counts.Add(new StatusCountItem(status, visits.Count));
 
-                if (status is VisitStatus.WaitingTriage or VisitStatus.WaitingDoctor)
+                if (status is VisitStatus.WaitingTriage or VisitStatus.WaitingDoctor or VisitStatus.InExamination)
                 {
                     waitingItems.AddRange(visits.Select(v => new WaitingVisitItem(
                         v.Id,
